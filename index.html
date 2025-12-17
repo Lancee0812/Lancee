@@ -40,7 +40,9 @@
     <!-- 头部英雄区 -->
     <section id="hero">
         <div class="hero-content">
-            <h1>你好！我是<span class="highlight" id="name-typing">奶昔</span><span class="blinking-cursor"></span></h1>
+            <h1>你好！</h1>
+            <h1>很高兴认识你</h1>
+            <h1>我是<span class="highlight" id="name-typing">奶昔</span><span class="blinking-cursor"></span></h1>
             <div class="angry-container">
                 <h2 class="playful-text">
                     <span class="angry-img-container">
@@ -49,7 +51,6 @@
                     不是小饮料！
                 </h2>
             </div>
-            <h1>欢迎来到我的小窝</h1>
             <a href="#contact" class="btn btn-primary">
                 跳转到联系方式
                 <i class="fas fa-paw paw-icon"></i>
@@ -60,21 +61,21 @@
     <!-- Fursona 展示区 -->
     <section id="fursona">
         <div class="container">
-            <h2 class="section-title">我的 Fursona</h2>
+            <h2 class="section-title">奶昔，一只小狼</h2>
             <div id="fursona-main">
                 <div class="fursona-image">
-                    <img src="https://picsum.photos/seed/fursona-main/800/800" alt="Lancee的主要Fursona角色" loading="lazy">
+                    <img src="Sources/FrontFace.png" alt="奶昔的正面照片" loading="lazy">
                 </div>
                 <div class="fursona-details">
                     <h3>Lancee</h3>
                     <div class="characteristics">
                         <div class="characteristic">
-                            <h4>角特征</h4>
-                            <p>具有独特的角结构，每个角都有精细的纹理和渐变色彩，是角色最显著的特征之一</p>
+                            <h4>外貌特征</h4>
+                            <p>有一只更小号的角，从小就比另一只角小，经过奶昔的悉心照料，还是没长大</p>
                         </div>
                         <div class="characteristic">
                             <h4>性格</h4>
-                            <p>充满好奇心、创造力和冒险精神，同时保持着温和与友善的本质</p>
+                            <p>充满好奇心、创造力，具有不服输的精神，轻微社恐</p>
                         </div>
                         <div class="characteristic">
                             <h4>背景故事</h4>
@@ -97,7 +98,7 @@
             <h2 class="section-title">我的作品</h2>
             <div id="portfolio-filter" class="filter-container">
                 <button class="filter-btn active" data-category="all">全部 <i class="fas fa-paw paw-icon"></i></button>
-                <button class="filter-btn" data-category="handmade">手作 <i class="fas fa-paw paw-icon"></i></button>
+                <button class="filter-btn" data-category="handmade">手工 <i class="fas fa-paw paw-icon"></i></button>
                 <button class="filter-btn" data-category="photography">摄影 <i class="fas fa-paw paw-icon"></i></button>
                 <button class="filter-btn" data-category="3d">3D建模 <i class="fas fa-paw paw-icon"></i></button>
                 <button class="filter-btn" data-category="drawing">画作 <i class="fas fa-paw paw-icon"></i></button>
@@ -184,40 +185,69 @@
         <div class="container">
             <h2 class="section-title">联系我</h2>
                 <div class="contact-text">
-                    <!-- 图片显示区域 -->
+                    <!-- 网页/照片显示区域 -->
                     <div class="contact-image-display" id="contactImageDisplay">
-                        <img src="https://picsum.photos/seed/qq/500/500" alt="QQ二维码" id="currentImage">
+                        <iframe src="https://space.bilibili.com/247244211?spm_id_from=333.1007.0.0" alt="Bilibili网页" id="currentIframe" frameborder="0" width="100%" height="100%"></iframe>
+                        <img src="Sources/QRcode/X.svg" alt="X二维码" id="currentImage" style="display: none;">
                     </div>
                     
                     <div class="social-links">
-                        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=ONUjsTLfpjzZbSuZMuJegj9w4G57pS80&jump_from=webapi&authKey=Q/PdzOdUUW3wxv30UwF46pd8MsuOj+RwnT4pTY7uELisKksq9fO1ZBsdXA96X828" aria-label="访问QQ" class="social-link active" target="_blank" rel="noopener noreferrer" data-image="https://picsum.photos/seed/qq/500/500" data-alt="QQ二维码">
-                            <i class="fab fa-qq"></i>
-                            <span>QQ</span>
-                            <i class="fas fa-paw paw-icon"></i>
-                        </a>
-                        <a href="https://x.com/naixi58300005?s=21" aria-label="访问X" class="social-link" target="_blank" rel="noopener noreferrer" data-image="https://picsum.photos/seed/x/500/500" data-alt="X二维码">
-                            <i class="fab fa-twitter"></i>
-                            <span>X</span>
-                            <i class="fas fa-paw paw-icon"></i>
-                        </a>
-                        <a href="https://space.bilibili.com/247244211?spm_id_from=333.1007.0.0" aria-label="访问Bilibili" class="social-link" target="_blank" rel="noopener noreferrer" data-image="https://picsum.photos/seed/bilibili/500/500" data-alt="Bilibili二维码">
+                        <a href="https://space.bilibili.com/247244211?spm_id_from=333.1007.0.0" aria-label="访问Bilibili" class="social-link active" target="_blank" rel="noopener noreferrer" data-image="Sources/QRcode/bilibili.svg" data-alt="Bilibili二维码">
+                            <div class="qrcode-container">
+                                <img src="Sources/QRcode/bilibili.svg" alt="Bilibili二维码">
+                            </div>
                             <i class="fab fa-bilibili"></i>
                             <span>Bilibili</span>
                             <i class="fas fa-paw paw-icon"></i>
                         </a>
-                        <a href="https://steamcommunity.com/profiles/76561199170680618/" aria-label="访问Steam" class="social-link" target="_blank" rel="noopener noreferrer" data-image="https://picsum.photos/seed/steam/500/500" data-alt="Steam二维码">
-                            <i class="fab fa-steam"></i>
-                            <span>Steam</span>
+                        <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=kusV/8%2B5LR9j%2B4AaIxAGxXc/HqM/mTCCFwqUhlCnno7Z07IM6PMV95mRE/ncJBiw&busi_data=eyJncm91cENvZGUiOiI4ODcyODU1OTMiLCJ0b2tlbiI6IjlLekl1Y3VOR1lkR3ZuZVNmYlJPalJFZHkyZHFzdVZtdldSeHdoV2JIcTdkcUJTOGFHbVJLbWhKTkdYQ0xvd2YiLCJ1aW4iOiIyNjkwODIyMzY5In0=&data=FVdaiTpwYxcSD_Az7mxs4Zgm-Ip6B8HHhsPrkWoYTckKu3zPbzX8Mz32VNvO-YJQvnJ0akFTNMfBk6lzAO8awAy-qqoB6wRlAHr07Wp3G0s&svctype=5&tempid=h5_group_info" aria-label="访问QQ" class="social-link" target="_blank" rel="noopener noreferrer" data-image="Sources/QRcode/QQ.svg" data-alt="QQ二维码">
+                            <div class="qrcode-container">
+                                <img src="Sources/QRcode/QQ.svg" alt="QQ二维码">
+                            </div>
+                            <div class="icon-text-container">
+                                <i class="fab fa-qq"></i>
+                                <span>QQ</span>
+                            </div>
                             <i class="fas fa-paw paw-icon"></i>
                         </a>
-                        <a href="https://t.me/Lancee0812" aria-label="访问Telegram" class="social-link" target="_blank" rel="noopener noreferrer" data-image="https://picsum.photos/seed/telegram/500/500" data-alt="Telegram二维码">
-                            <i class="fab fa-telegram"></i>
-                            <span>Telegram</span>
+                        <a href="https://x.com/naixi58300005?s=21" aria-label="访问X" class="social-link" target="_blank" rel="noopener noreferrer" data-image="Sources/QRcode/X.svg" data-alt="X二维码">
+                            <div class="qrcode-container">
+                                <img src="Sources/QRcode/X.svg" alt="X二维码">
+                            </div>
+                            <div class="icon-text-container">
+                                <i class="fab fa-twitter"></i>
+                                <span>X</span>
+                            </div>
                             <i class="fas fa-paw paw-icon"></i>
                         </a>
-                        <a href="#" aria-label="访问GitHub" class="social-link" target="_blank" rel="noopener noreferrer" data-image="https://picsum.photos/seed/github/500/500" data-alt="GitHub二维码">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
+                        <a href="https://t.me/Lancee0812" aria-label="访问Telegram" class="social-link" target="_blank" rel="noopener noreferrer" data-image="Sources/QRcode/telegram.svg" data-alt="Telegram二维码">
+                            <div class="qrcode-container">
+                                <img src="Sources/QRcode/telegram.svg" alt="Telegram二维码">
+                            </div>
+                            <div class="icon-text-container">
+                                <i class="fab fa-telegram"></i>
+                                <span>Telegram</span>
+                            </div>
+                            <i class="fas fa-paw paw-icon"></i>
+                        </a>
+                        <a href="https://steamcommunity.com/profiles/76561199170680618/" aria-label="访问Steam" class="social-link" target="_blank" rel="noopener noreferrer" data-image="Sources/QRcode/steam.svg" data-alt="Steam二维码">
+                            <div class="qrcode-container">
+                                <img src="Sources/QRcode/steam.svg" alt="Steam二维码">
+                            </div>
+                            <div class="icon-text-container">
+                                <i class="fab fa-steam"></i>
+                                <span>Steam</span>
+                            </div>
+                            <i class="fas fa-paw paw-icon"></i>
+                        </a>
+                        <a href="https://github.com/Lancee0812/" aria-label="访问GitHub" class="social-link" target="_blank" rel="noopener noreferrer" data-image="Sources/QRcode/github.svg" data-alt="GitHub二维码">
+                            <div class="qrcode-container">
+                                <img src="Sources/QRcode/github.svg" alt="GitHub二维码">
+                            </div>
+                            <div class="icon-text-container">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </div>
                             <i class="fas fa-paw paw-icon"></i>
                         </a>
                     </div>

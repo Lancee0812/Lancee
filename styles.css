@@ -1,8 +1,21 @@
-/* 全局重置和基础样式 */
+/* 基础样式重置 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* 隐藏网页右侧滚动条，但保持内容可滚动 */
+html, body {
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Chrome, Safari 和 Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
 }
 
 html {
@@ -638,11 +651,11 @@ section {
 
 /* 联系图片显示区域样式 */
 .contact-image-display {
-    height: 500px;
+    height: 600px;
     margin-bottom: var(--spacing-lg);
     overflow: hidden;
-    border-radius: var(--border-radius-medium);
-    box-shadow: var(--shadow-medium);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-strong);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -716,6 +729,17 @@ section {
     font-size: 24px;
     gap: var(--spacing-md);
     position: relative;
+    z-index: 1;
+    margin-top: 0;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+/* 图标文字容器样式 */
+.social-link .icon-text-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .social-link i, .social-link svg {
@@ -729,21 +753,47 @@ section {
     margin-right: var(--spacing-sm);
 }
 
-.social-link:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: -10px;
-    top: 10%;
-    height: 80%;
-    width: 1px;
-    background-color: var(--color-bg-medium);
-    opacity: 0.5;
-}
-
 .social-link:hover {
     background-color: var(--color-primary);
     color: var(--color-white);
     transform: scale(1.05);
+    transition: all var(--transition-normal) ease;
+}
+
+/* 二维码容器样式 */
+.qrcode-container {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--shadow-medium);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal) ease;
+    z-index: 10;
+    padding: var(--spacing-sm);
+    box-sizing: border-box;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* 二维码图片样式 */
+.qrcode-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-xs);
+}
+
+/* 悬停显示二维码 */
+.social-link:hover .qrcode-container {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    transition: all var(--transition-normal) ease;
 }
 
 /* 回到顶部按钮样式 */

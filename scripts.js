@@ -327,28 +327,182 @@ document.addEventListener('DOMContentLoaded', function() {
     // 调用页面访问统计
     trackPageView();
 
-    // 联系图片切换功能
+    // 联系内容切换功能
     const socialLinks = document.querySelectorAll('.social-link');
+    const currentIframe = document.getElementById('currentIframe');
     const currentImage = document.getElementById('currentImage');
+    let autoRotateInterval = null;
+    let currentIndex = 0;
+    let isUserInteracting = false;
+    const ROTATE_INTERVAL = 3000; // 自动轮播间隔，3秒
     
-    socialLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            // 移除所有链接的active类
-            socialLinks.forEach(l => l.classList.remove('active'));
-            // 添加当前链接的active类
-            this.classList.add('active');
-            
-            // 获取当前链接的数据属性
-            const imageUrl = this.getAttribute('data-image');
-            const imageAlt = this.getAttribute('data-alt');
-            
-            // 更新显示的图片
+    // 检测是否为PC设备
+    function isPC() {
+        const userAgentInfo = navigator.userAgent;
+        const Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
+        let isPCDevice = true;
+        for (let i = 0; i < Agents.length; i++) {
+            if (userAgentInfo.indexOf(Agents[i]) > 0) {
+                isPCDevice = false;
+                break;
+            }
+        }
+        return isPCDevice;
+    }
+    
+    // 切换到指定索引的链接
+    function switchToLink(index) {
+        // 确保索引在有效范围内
+        index = index % socialLinks.length;
+        if (index < 0) {
+            index = socialLinks.length - 1;
+        }
+        
+        // 移除所有链接的active类
+        socialLinks.forEach(l => l.classList.remove('active'));
+        // 添加当前链接的active类
+        socialLinks[index].classList.add('active');
+        
+        // 获取当前链接的数据属性
+        const linkHref = socialLinks[index].getAttribute('href');
+        const imageUrl = socialLinks[index].getAttribute('data-image');
+        const imageAlt = socialLinks[index].getAttribute('data-alt');
+        
+        // 根据索引决定显示iframe还是图片
+        // 前2个链接显示网页，后4个链接显示照片
+        if (index < 2) {
+            // 显示网页
+            currentImage.style.display = 'none';
+            currentIframe.style.display = 'block';
+            currentIframe.style.opacity = '0';
+            setTimeout(() => {
+                currentIframe.src = linkHref;
+                currentIframe.alt = imageAlt;
+                currentIframe.style.opacity = '1';
+            }, 300);
+        } else {
+            // 显示照片
+            currentIframe.style.display = 'none';
+            currentImage.style.display = 'block';
             currentImage.style.opacity = '0';
             setTimeout(() => {
                 currentImage.src = imageUrl;
                 currentImage.alt = imageAlt;
                 currentImage.style.opacity = '1';
             }, 300);
+        }
+        
+        // 更新当前索引
+        currentIndex = index;
+    }
+    
+    // 开始自动轮播
+    function startAutoRotate() {
+        // 只在非PC设备上启动自动轮播
+        if (!isPC()) {
+            if (autoRotateInterval) {
+                clearInterval(autoRotateInterval);
+            }
+            autoRotateInterval = setInterval(() => {
+                if (!isUserInteracting) {
+                    switchToLink(currentIndex + 1);
+                }
+            }, ROTATE_INTERVAL);
+        }
+    }
+    
+    // 暂停自动轮播
+    function pauseAutoRotate() {
+        isUserInteracting = true;
+        clearTimeout(resumeTimeout);
+    }
+    
+    // 恢复自动轮播的定时器
+    let resumeTimeout = null;
+    
+    // 恢复自动轮播
+    function resumeAutoRotate() {
+        // 只在非PC设备上恢复自动轮播
+        if (!isPC()) {
+            resumeTimeout = setTimeout(() => {
+                isUserInteracting = false;
+            }, 5000); // 用户停止交互5秒后恢复自动轮播
+        }
+    }
+    
+    // 为所有社交链接添加事件监听器
+    socialLinks.forEach((link, index) => {
+        // 鼠标悬停时暂停自动轮播
+        link.addEventListener('mouseenter', function() {
+            pauseAutoRotate();
+            
+            // 移除所有链接的active类
+            socialLinks.forEach(l => l.classList.remove('active'));
+            // 添加当前链接的active类
+            this.classList.add('active');
+            
+            // 获取当前链接的数据属性
+            const linkHref = this.getAttribute('href');
+            const imageUrl = this.getAttribute('data-image');
+            const imageAlt = this.getAttribute('data-alt');
+            
+            // 根据索引决定显示iframe还是图片
+            // 前2个链接显示网页，后4个链接显示照片
+            if (index < 2) {
+                // 显示网页
+                currentImage.style.display = 'none';
+                currentIframe.style.display = 'block';
+                currentIframe.style.opacity = '0';
+                setTimeout(() => {
+                    currentIframe.src = linkHref;
+                    currentIframe.alt = imageAlt;
+                    currentIframe.style.opacity = '1';
+                }, 300);
+            } else {
+                // 显示照片
+                currentIframe.style.display = 'none';
+                currentImage.style.display = 'block';
+                currentImage.style.opacity = '0';
+                setTimeout(() => {
+                    currentImage.src = imageUrl;
+                    currentImage.alt = imageAlt;
+                    currentImage.style.opacity = '1';
+                }, 300);
+            }
+        });
+        
+        // 鼠标离开时设置恢复自动轮播的定时器
+        link.addEventListener('mouseleave', function() {
+            resumeAutoRotate();
+        });
+        
+        // 点击时暂停自动轮播，同时允许默认跳转
+        link.addEventListener('click', function() {
+            pauseAutoRotate();
+        });
+        
+        // 触摸事件处理（针对触屏设备）
+        link.addEventListener('touchstart', function(e) {
+            pauseAutoRotate();
         });
     });
+    
+    // 为body添加触摸事件，用于检测用户交互
+    document.body.addEventListener('touchstart', function() {
+        resumeAutoRotate();
+    });
+    
+    // 启动自动轮播
+    startAutoRotate();
+    
+    // 禁止iframe内的滚动事件影响主页面
+    currentIframe.addEventListener('wheel', function(e) {
+        // 阻止事件冒泡到body，避免影响主页面滚动
+        e.stopPropagation();
+    }, { passive: true });
+    
+    // 禁止触摸事件影响主页面滚动
+    currentIframe.addEventListener('touchmove', function(e) {
+        e.stopPropagation();
+    }, { passive: true });
 });
